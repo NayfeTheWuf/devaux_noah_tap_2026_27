@@ -4,6 +4,7 @@
 
 # Dossier de configuration des IDE
 .vs/
+.vscode/
 .idea/
 
 # Fichiers utilisateur
