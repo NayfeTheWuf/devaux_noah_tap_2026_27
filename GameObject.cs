@@ -73,7 +73,7 @@ namespace activity_00_tap_26_27
             return null;
         }
 
-        //Mise à jour à chaque frame
+        //Mise à jour à chaque frame par rapport au "component"
         public void Update(float elapsed_time)
         {
             foreach (Component component in _componentTable)
@@ -85,7 +85,7 @@ namespace activity_00_tap_26_27
             }
         }
 
-        //Mise à jour à une intervalle spécifique
+        //Mise à jour à une intervalle spécifique par rapport au "component"
         public void FixedUpdate(float fixed_elapsed_time)
         {
             foreach (Component component in _componentTable)

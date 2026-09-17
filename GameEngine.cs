@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System;
 using activity_00_tap_26_27.Components;
+using activity_00_tap_26_27.Events;
 
 namespace activity_00_tap_26_27
 {
@@ -15,6 +16,8 @@ namespace activity_00_tap_26_27
 
         private readonly ConsoleRenderManager _renderManager = new ConsoleRenderManager();
 
+        private readonly EventManager _eventManager;
+        
         private bool _shouldQuit = false;
 
         //Lance le program
@@ -24,6 +27,7 @@ namespace activity_00_tap_26_27
 
             float last_time = GetCurrentTime();
 
+            //Game loop
             while (!_shouldQuit)
             {
                 float loop_start_time = GetCurrentTime();
@@ -37,6 +41,8 @@ namespace activity_00_tap_26_27
                 }
 
                 Update(elapsed_time);
+
+                _eventManager.ProcessEvent();
 
                 Render();
 
