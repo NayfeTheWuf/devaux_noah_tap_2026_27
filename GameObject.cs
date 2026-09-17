@@ -9,21 +9,25 @@ namespace activity_00_tap_26_27
         private readonly string _name;
         private bool _isActive = false;
 
+        //Définir le GameObject "_name"
         public GameObject(string name)
         {
             _name = name;
         }
 
+        //Retourner le "_name"
         public string GetName()
         {
             return _name;
         }
 
+        //Retourner le statut de "_isActive"
         public bool GetIsActive()
         {
             return _isActive;
         }
 
+        //Définir un statut à "_isActive"
         public virtual void SetIsActive(bool is_active)
         {
             if (_isActive != is_active)
@@ -49,11 +53,13 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Ajoute un "component" à la table "_componentTable"
         public void AddComponent(Component component)
         {
             _componentTable.Add(component);
         }
 
+        //Retourne un "component" voulu si celui-ci est existant
         public TYPE GetComponent<TYPE>() where TYPE : Component
         {
             for (int component_index = 0; component_index < _componentTable.Count; component_index++)
@@ -67,6 +73,7 @@ namespace activity_00_tap_26_27
             return null;
         }
 
+        //Mise à jour à chaque frame
         public void Update(float elapsed_time)
         {
             foreach (Component component in _componentTable)
@@ -78,6 +85,7 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Mise à jour à une intervalle spécifique
         public void FixedUpdate(float fixed_elapsed_time)
         {
             foreach (Component component in _componentTable)

@@ -17,6 +17,7 @@ namespace activity_00_tap_26_27
 
         private bool _shouldQuit = false;
 
+        //Lance le program
         public void Run()
         {
             _stopwatch.Start();
@@ -27,10 +28,13 @@ namespace activity_00_tap_26_27
             {
                 float loop_start_time = GetCurrentTime();
                 float elapsed_time = loop_start_time - last_time;
-
+                
                 ProcessInput();
 
-                //FixedUpdate(FIXED_FRAME_TIME);
+                while (elapsed_time == 50)
+                {
+                    FixedUpdate(FIXED_FRAME_TIME);    
+                }
 
                 Update(elapsed_time);
 
@@ -42,6 +46,7 @@ namespace activity_00_tap_26_27
             Console.WriteLine("Goodbye!");
         }
 
+        //Confirme les actions claviers de l'utilisateur
         private void ProcessInput()
         {
             while (Console.KeyAvailable)
@@ -55,6 +60,7 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Mise à jour à intervalles de temps fixes
         private void FixedUpdate(float fixed_elapsed_time)
         {
             for (int object_index = 0; object_index < _gameObjectTable.Count; object_index++)
@@ -68,6 +74,7 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Mise à jour à chaque frame
         private void Update(float elapsed_time)
         {
             for (int object_index = 0; object_index < _gameObjectTable.Count; object_index++)
@@ -81,12 +88,14 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Méthode de rendu graphique 
         private void Render()
         {
             _renderManager.Draw(0,0, "Game in progress...\n", ConsoleColor.Magenta);
             _renderManager.Render();
         }
 
+        //Retourner le temps actuel
         private float GetCurrentTime()
         {
             return _stopwatch.ElapsedMilliseconds / 1000.0f;

@@ -14,11 +14,13 @@
 
         }
 
+        //Retourne le statut de "_isActive"
         public bool GetIsActive()
         {
             return _isActive;
         }
 
+        //Définir un statut à "_isActive"
         public void SetActive(bool is_active)
         {
             if (_isActive != is_active)

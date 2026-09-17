@@ -7,6 +7,7 @@ namespace activity_00_tap_26_27.Events
     {
         private readonly Dictionary<Type, List<Action<IGameEvent>>> _eventTypeTable = new Dictionary<Type, List<Action<IGameEvent>>>();
 
+        //Enregistre un évènement dans la table d'évènement
         public void RegisterToEvent<TYPE>(Action<IGameEvent> action) where TYPE : IGameEvent
         {
             Type event_type = typeof(TYPE);
@@ -19,6 +20,7 @@ namespace activity_00_tap_26_27.Events
             _eventTypeTable[event_type].Add(action);
         }
 
+        //Supprime un évènement  dans la table d'évènement
         public void UnregisterFromEvent<TYPE>(Action<IGameEvent> action) where TYPE : IGameEvent
         {
             Type event_type = typeof(TYPE);
@@ -29,6 +31,7 @@ namespace activity_00_tap_26_27.Events
             }
         }
 
+        //Exécute un évènement spécifique
         public void TriggerEvent(IGameEvent game_event)
         {
             Type event_type = game_event.GetType();

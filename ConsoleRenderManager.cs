@@ -15,6 +15,7 @@ namespace activity_00_tap_26_27
         private int _width;
         private int _height;
 
+        //Mise en graphique de la console
         public ConsoleRenderManager()
         {
             _width = Console.WindowWidth;
@@ -27,6 +28,7 @@ namespace activity_00_tap_26_27
             ClearBuffer(_previousBuffer);
         }
 
+        // (idk)
         private void ClearBuffer(Pixel[,] buffer)
         {
             for (int y = 0; y < _height; y++)
@@ -38,6 +40,7 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Dessine la structure graphique
         public void Draw(int x, int y, string text, ConsoleColor color)
         {
             if (x < 0 || x >= _width || y < 0 || y >= _height)
@@ -53,7 +56,8 @@ namespace activity_00_tap_26_27
                 }
             }
         }
-
+        
+        //Affiche le visuel définit
         public void Render()
         {
             // The actual drawing to the console happens here by comparing buffers
