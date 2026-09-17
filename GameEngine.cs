@@ -8,23 +8,25 @@ namespace activity_00_tap_26_27
 {
     public class GameEngine
     {
+        //Var de temps
         private const float FIXED_FRAME_TIME = 20 / 1000.0f;
-
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
+        //Var de base de donnée
         private readonly List<GameObject> _gameObjectTable = new List<GameObject>();
 
+        //Var de Manager
         private readonly ConsoleRenderManager _renderManager = new ConsoleRenderManager();
-
         private readonly EventManager _eventManager;
         
+        //Var indé
         private bool _shouldQuit = false;
 
         //Lance le program
         public void Run()
         {
             _stopwatch.Start();
-
+            float lag = 0.0f;
             float last_time = GetCurrentTime();
 
             //Game loop
@@ -32,12 +34,14 @@ namespace activity_00_tap_26_27
             {
                 float loop_start_time = GetCurrentTime();
                 float elapsed_time = loop_start_time - last_time;
-                
+                lag += elapsed_time;
+
                 ProcessInput();
 
-                while (elapsed_time == 50)
+                while (lag >= FIXED_FRAME_TIME)
                 {
                     FixedUpdate(FIXED_FRAME_TIME);    
+                    lag -= FIXED_FRAME_TIME;
                 }
 
                 Update(elapsed_time);
