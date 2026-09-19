@@ -26,6 +26,7 @@ namespace activity_00_tap_26_27
         public void Run()
         {
             _stopwatch.Start();
+            //Accumulateur de temps
             float lag = 0.0f;
             float last_time = GetCurrentTime();
 
@@ -38,18 +39,16 @@ namespace activity_00_tap_26_27
 
                 ProcessInput();
 
+                //Toujours à la même fréquence
                 while (lag >= FIXED_FRAME_TIME)
                 {
                     FixedUpdate(FIXED_FRAME_TIME);    
                     lag -= FIXED_FRAME_TIME;
+                    _eventManager.ProcessEvent();
                 }
 
                 Update(elapsed_time);
-
-                _eventManager.ProcessEvent();
-
                 Render();
-
                 last_time = loop_start_time;
             }
 
