@@ -47,21 +47,10 @@ namespace activity_00_tap_26_27.Events
             }
         }
 
-        //Exécute un évènement spécifique à une valeur de temps établit
-        public void DelayedTriggerEvent (IGameEvent game_event, float fixed_elapsed_time, float current_time)
+        //Exécute un évènement spécifique à un moment voulu
+        public void DelayedTriggerEvent (IGameEvent game_event)
         {
-            Type event_type = game_event.GetType();
-            float delayed_event_time = fixed_elapsed_time;
-            float timer = current_time;
-            
-            if(_eventTypeTable.ContainsKey(event_type) && timer == delayed_event_time)
-            {
-                for (int event_index = 0; event_index < _eventTypeTable[event_type].Count; event_index++)
-                {
-                    Action<IGameEvent> action = _eventTypeTable[event_type][event_index];
-                    action(game_event);
-                }               
-            }
+            _eventQueue.Enqueue(game_event);
         }
 
         //Traités les évènments au moment choisi

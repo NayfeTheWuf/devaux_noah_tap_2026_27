@@ -12,12 +12,10 @@ namespace activity_00_tap_26_27
         private const float FIXED_FRAME_TIME = 20 / 1000.0f;
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
-        //Var de base de donnée
-        private readonly List<GameObject> _gameObjectTable = new List<GameObject>();
-
         //Var de Manager
         private readonly ConsoleRenderManager _renderManager = new ConsoleRenderManager();
-        private readonly EventManager _eventManager;
+        private readonly EventManager _eventManager = new EventManager();
+        private GameManager _gameManager;
         
         //Var indé
         private bool _shouldQuit = false;
@@ -26,13 +24,19 @@ namespace activity_00_tap_26_27
         public void Run()
         {
             _stopwatch.Start();
+
             //Accumulateur de temps
             float lag = 0.0f;
             float last_time = GetCurrentTime();
 
+            //Appel des Manager
+            LogManager log_manager = new LogManager(_eventManager);
+            _gameManager = new GameManager(_eventManager);
+
             //Game loop
             while (!_shouldQuit)
             {
+                //Valeur de temps
                 float loop_start_time = GetCurrentTime();
                 float elapsed_time = loop_start_time - last_time;
                 lag += elapsed_time;
@@ -42,17 +46,16 @@ namespace activity_00_tap_26_27
                 //Toujours à la même fréquence
                 while (lag >= FIXED_FRAME_TIME)
                 {
-                    FixedUpdate(FIXED_FRAME_TIME);    
-                    lag -= FIXED_FRAME_TIME;
+                    FixedUpdate(FIXED_FRAME_TIME);
                     _eventManager.ProcessEvent();
+                    lag -= FIXED_FRAME_TIME;
                 }
 
                 Update(elapsed_time);
                 Render();
+
                 last_time = loop_start_time;
             }
-
-            Console.WriteLine("Goodbye!");
         }
 
         //Confirme les actions claviers de l'utilisateur
@@ -69,32 +72,16 @@ namespace activity_00_tap_26_27
             }
         }
 
-        //Mise à jour à intervalles de temps fixes
+        //Appel le FixedUpdate du GameManager
         private void FixedUpdate(float fixed_elapsed_time)
         {
-            for (int object_index = 0; object_index < _gameObjectTable.Count; object_index++)
-            {
-                GameObject game_object = _gameObjectTable[object_index];
-
-                if (game_object.GetIsActive())
-                {
-                    game_object.FixedUpdate(fixed_elapsed_time);
-                }
-            }
+            _gameManager.FixedUpdate(fixed_elapsed_time);
         }
 
-        //Mise à jour à chaque frame
+        //Appel l'Update du GameManager
         private void Update(float elapsed_time)
         {
-            for (int object_index = 0; object_index < _gameObjectTable.Count; object_index++)
-            {
-                GameObject game_object = _gameObjectTable[object_index];
-
-                if (game_object.GetIsActive())
-                {
-                    game_object.Update(elapsed_time);
-                }
-            }
+            _gameManager.Update(elapsed_time);
         }
 
         //Méthode de rendu graphique 
