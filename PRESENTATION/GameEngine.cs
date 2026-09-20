@@ -16,9 +16,6 @@ namespace activity_00_tap_26_27
         private readonly ConsoleRenderManager _renderManager = new ConsoleRenderManager();
         private readonly EventManager _eventManager = new EventManager();
         private GameManager _gameManager;
-        
-        //Var indé
-        private bool _shouldQuit = false;
 
         //Lance le program
         public void Run()
@@ -117,7 +114,7 @@ namespace activity_00_tap_26_27
             _gameManager.Update(elapsed_time);
         }
 
-        //Méthode de rendu graphique 
+        //Méthode de rendu graphique de base
         private void Render()
         {
             _renderManager.Draw(0,0, "Game in progress...\n", ConsoleColor.Magenta);

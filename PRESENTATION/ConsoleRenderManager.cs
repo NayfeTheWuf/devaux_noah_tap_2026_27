@@ -8,6 +8,8 @@ namespace activity_00_tap_26_27
         {
             public char Character;
             public ConsoleColor Color;
+            public ConsoleColor ForegroundColor;
+            public ConsoleColor BackgroundColor;
         }
 
         private Pixel[,] _currentBuffer;
@@ -35,13 +37,18 @@ namespace activity_00_tap_26_27
             {
                 for (int x = 0; x < _width; x++)
                 {
-                    buffer[x, y] = new Pixel { Character = ' ', Color = ConsoleColor.Gray };
+                    buffer[x, y] = new Pixel 
+                    { 
+                        Character = ' ',
+                        ForegroundColor = ConsoleColor.Gray,
+                        BackgroundColor = ConsoleColor.Black
+                    };
                 }
             }
         }
 
         //Dessine la structure graphique
-        public void Draw(int x, int y, string text, ConsoleColor color)
+        public void Draw(int x, int y, string text, ConsoleColor color, ConsoleColor background_color = ConsoleColor.Black)
         {
             if (x < 0 || x >= _width || y < 0 || y >= _height)
             {
@@ -52,7 +59,12 @@ namespace activity_00_tap_26_27
             {
                 if (x + character_index < _width)
                 {
-                    _currentBuffer[x + character_index, y] = new Pixel { Character = text[character_index], Color = color };
+                    _currentBuffer[x + character_index, y] = new Pixel
+                    {
+                        Character = text[character_index],
+                        ForegroundColor = color,
+                        BackgroundColor = background_color
+                    };
                 }
             }
         }
@@ -68,17 +80,22 @@ namespace activity_00_tap_26_27
                     Pixel current = _currentBuffer[x, y];
                     Pixel previous = _previousBuffer[x, y];
 
-                    if (current.Character != previous.Character || current.Color != previous.Color)
+                    if (
+                            current.Character != previous.Character
+                            || current.ForegroundColor != previous.ForegroundColor
+                            || current.BackgroundColor != previous.BackgroundColor
+                        )
                     {
                         Console.SetCursorPosition(x, y);
-                        Console.ForegroundColor = current.Color;
+                        Console.ForegroundColor = current.ForegroundColor;
+                        Console.BackgroundColor = current.BackgroundColor;
                         Console.Write(current.Character);
                         _previousBuffer[x, y] = current;
                     }
                 }
             }
 
-            // Reset current buffer for next frame
+            //Reset current buffer for next frame
             ClearBuffer(_currentBuffer);
             
             Console.ResetColor();

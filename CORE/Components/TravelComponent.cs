@@ -61,6 +61,14 @@ namespace activity_00_tap_26_27.CORE.Components
             _travelDuration = duration;
             _elapsedTime = 0f;
             _isMoving = true;
+
+            //Log tout propre
+            _eventManager.TriggerEvent(new LogMessageGameEvent
+                (   
+                    $"Start {_currentLocation.GetLocationName()} " +
+                    $"to {destination.GetLocationName()} " +
+                    $"(time : {duration} seconds).")
+                );
         }
 
         //Fait avancer le déplacement en cours
@@ -85,6 +93,8 @@ namespace activity_00_tap_26_27.CORE.Components
             _isMoving = false;
             _elapsedTime = 0f;
 
+            //Log
+            _eventManager.TriggerEvent(new LogMessageGameEvent($"Enter in {_currentLocation.GetLocationName()}."));
             //Informe l'arriver
             _eventManager.TriggerEvent(new TravelGameEvent(this));
         }
