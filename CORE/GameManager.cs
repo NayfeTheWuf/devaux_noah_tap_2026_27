@@ -13,8 +13,12 @@ namespace activity_00_tap_26_27
         //Var d'action
         private List<GameActionType> _gameDestinationTable = new List<GameActionType>();
         private int _selectedDestinationIndex = 0;
-        private bool _isMoving;
-        private bool _shouldQuit;
+        private bool _isMoving = false;
+        private bool _shouldQuit = false;
+
+        //Var de location
+        private LocationComponent _currentLocation;
+        private LocationComponent _destinationLocation;
 
         //Enregistrement et utilisation des events
         public GameManager(EventManager event_manager)
@@ -26,6 +30,17 @@ namespace activity_00_tap_26_27
             //Objet de test
             GameObject object_testing = new GameObject("test_object");
             event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(object_testing));
+
+            WorldBuilderManager world_builder = new WorldBuilderManager();
+            world_builder.BuildWorld();
+
+            //Enregistrer chaque location
+            for (int object_index = 0; object_index < world_builder._locationGameObjects.Count; object_index++)
+            {
+                event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(world_builder._locationGameObjects[object_index]));
+            }
+
+            _currentLocation = world_builder._startingLocation;
         }
 
         //Enregistrer un objet dans un event
@@ -112,6 +127,7 @@ namespace activity_00_tap_26_27
                 return;
             }
 
+            _destinationLocation = _currentLocation.GetLiaisonDestination(_selectedDestinationIndex);
             _isMoving = true;
         }
 
