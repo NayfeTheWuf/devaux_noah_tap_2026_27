@@ -15,14 +15,13 @@ namespace activity_00_tap_26_27
         //Var d'action
         private bool _isMoving = false;
         private bool _shouldQuit = false;
-        private bool _hasSelectedDestination = false;
 
 
         //Var de location
         private TravelComponent _heroesTravelComponent;
         private LocationComponent _currentLocation;
         private LocationComponent _destinationLocation;
-        private int _selectedDestinationIndex = 0;
+        private int _selectedDestinationIndex = -1;
 
         //Enregistrement et utilisation des events
         public GameManager(EventManager event_manager)
@@ -99,7 +98,7 @@ namespace activity_00_tap_26_27
         //Réagit à l'arrivée du groupe de héros à destination
         private void OnTravelGameEvent(IGameEvent game_event)
         {
-            _hasSelectedDestination = false;
+            _selectedDestinationIndex = -1;
         }
 
         //Change la destination sélectionner
@@ -119,26 +118,33 @@ namespace activity_00_tap_26_27
             {
                 return;
             }
-                  
-            //Si aucune, prendre la première
-            if (new_direction_index < 0)
-            {
-                new_direction_index = 0;
-            }
-            //Aussi non, prendre le dernier
-            else if (new_direction_index >= _gameObjectTable.Count)
-            {
-                new_direction_index = _gameObjectTable.Count - 1;
-            }
 
-            //Nouvelle direction
-            _selectedDestinationIndex = new_direction_index;
+            if (_selectedDestinationIndex == -1)
+            {
+                _selectedDestinationIndex = 0;
+            }
+            else
+            {
+                //Si aucune, prendre la première
+                if (new_direction_index < 0)
+                {
+                    new_direction_index = 0;
+                }
+                //Aussi non, prendre le dernier
+                else if (new_direction_index >= _gameObjectTable.Count)
+                {
+                    new_direction_index = _gameObjectTable.Count - 1;
+                }
+
+                //Nouvelle direction
+                _selectedDestinationIndex = new_direction_index;
+            }
         }
 
         //Lance le déplacement vers la destination sélectionnée, si aucune sélection ne rien faire
         private void ConfirmSelection()
         {
-            if (_selectedDestinationIndex == 0 || _heroesTravelComponent.GetIsMoving())
+            if (_selectedDestinationIndex == -1 || _heroesTravelComponent.GetIsMoving())
             {
                 return;
             }
@@ -153,7 +159,7 @@ namespace activity_00_tap_26_27
         //Annule la sélection en cours
         private void CancelSelection()
         {
-            _hasSelectedDestination = false;
+            _selectedDestinationIndex = -1;
         }
 
         //Retourne l'arrêt
