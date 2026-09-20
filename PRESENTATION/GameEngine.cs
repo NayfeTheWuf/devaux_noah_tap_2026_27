@@ -1,9 +1,7 @@
-﻿using activity_00_tap_26_27.Components;
-using activity_00_tap_26_27.CORE.Components;
+﻿using activity_00_tap_26_27.CORE.Components;
 using activity_00_tap_26_27.CORE.Events;
 using activity_00_tap_26_27.Events;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace activity_00_tap_26_27
