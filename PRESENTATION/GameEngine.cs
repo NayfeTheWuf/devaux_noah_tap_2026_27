@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System;
-using activity_00_tap_26_27.Components;
+﻿using activity_00_tap_26_27.Components;
+using activity_00_tap_26_27.CORE.Components;
+using activity_00_tap_26_27.CORE.Events;
 using activity_00_tap_26_27.Events;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace activity_00_tap_26_27
 {
@@ -34,7 +36,7 @@ namespace activity_00_tap_26_27
             _gameManager = new GameManager(_eventManager);
 
             //Game loop
-            while (!_shouldQuit)
+            while (!_gameManager.GetShouldQuit())
             {
                 //Valeur de temps
                 float loop_start_time = GetCurrentTime();
@@ -58,17 +60,50 @@ namespace activity_00_tap_26_27
             }
         }
 
-        //Confirme les actions claviers de l'utilisateur
+        //Lit les input du joueur pour les traduire et déclancher l'évènement correspondant
         private void ProcessInput()
         {
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo player_command = Console.ReadKey(true);
+                //Traduit l'input du joueur
+                GameActionType game_action_type = TranslateKey(player_command.Key);
 
-                if (player_command.Key == ConsoleKey.Escape)
+                //Si l'input est correcte, trigger l'event lié
+                if (game_action_type != null)
                 {
-                    _shouldQuit = true;
+                    _eventManager.TriggerEvent(new GameActionGameEvent(game_action_type));
                 }
+            }
+        }
+
+        //Traduit l'input en commande de jeu
+        private GameActionType TranslateKey(ConsoleKey key)
+        {
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    Console.WriteLine("Up");
+                    return GameActionType.NAVIGATE_UP;
+
+                case ConsoleKey.DownArrow:
+                    Console.WriteLine("Down");
+                    return GameActionType.NAVIGATE_DOWN;
+
+                case ConsoleKey.Enter:
+                    Console.WriteLine("Confirm");
+                    return GameActionType.CONFIRM;
+
+                case ConsoleKey.Backspace:
+                    Console.WriteLine("Cancel");
+                    return GameActionType.CANCEL;
+
+                case ConsoleKey.Escape:
+                    Console.WriteLine("Quit");
+                    return GameActionType.QUIT;
+                
+                default:
+                    return GameActionType.NULL;
             }
         }
 
