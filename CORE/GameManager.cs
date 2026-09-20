@@ -2,6 +2,7 @@ using activity_00_tap_26_27.CORE.Components;
 using activity_00_tap_26_27.CORE.Events;
 using activity_00_tap_26_27.Events;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace activity_00_tap_26_27
 {
@@ -9,38 +10,44 @@ namespace activity_00_tap_26_27
     {
         //Var de base de donnée
         private readonly List<GameObject> _gameObjectTable = new List<GameObject>();
+        private List<GameActionType> _gameDestinationTable = new List<GameActionType>();
 
         //Var d'action
-        private List<GameActionType> _gameDestinationTable = new List<GameActionType>();
-        private int _selectedDestinationIndex = 0;
         private bool _isMoving = false;
         private bool _shouldQuit = false;
+        private bool _hasSelectedDestination = false;
+
 
         //Var de location
+        private TravelComponent _heroesTravelComponent;
         private LocationComponent _currentLocation;
         private LocationComponent _destinationLocation;
+        private int _selectedDestinationIndex = 0;
 
         //Enregistrement et utilisation des events
         public GameManager(EventManager event_manager)
         {
+            //Event
             event_manager.RegisterToEvent<RegisterGameObjectGameEvent>(OnRegisterGameObjectGameEvent);
             event_manager.RegisterToEvent<UnregisterGameObjectGameEvent>(OnUnregisterGameObjectGameEvent);
             event_manager.RegisterToEvent<GameActionGameEvent>(OnGameActionGameEvent);
+            event_manager.RegisterToEvent<TravelGameEvent>(OnTravelGameEvent);
 
-            //Objet de test
-            GameObject object_testing = new GameObject("test_object");
-            event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(object_testing));
-
+            //WorldMapping
             WorldBuilderManager world_builder = new WorldBuilderManager();
             world_builder.BuildWorld();
-
             //Enregistrer chaque location
             for (int object_index = 0; object_index < world_builder._locationGameObjects.Count; object_index++)
             {
                 event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(world_builder._locationGameObjects[object_index]));
             }
 
-            _currentLocation = world_builder._startingLocation;
+            //Groupe de héros
+            GameObject heroes_object = new GameObject("Heroes");
+            _heroesTravelComponent = new TravelComponent(world_builder._startingLocation, event_manager);
+            heroes_object.AddComponent(_heroesTravelComponent);
+            heroes_object.SetIsActive(true);
+            event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(heroes_object));
         }
 
         //Enregistrer un objet dans un event
@@ -89,52 +96,64 @@ namespace activity_00_tap_26_27
             }
         }
 
+        //Réagit à l'arrivée du groupe de héros à destination
+        private void OnTravelGameEvent(IGameEvent game_event)
+        {
+            _hasSelectedDestination = false;
+        }
+
         //Change la destination sélectionner
         private void NavigateSelection(int direction)
         {
             int new_direction_index = _selectedDestinationIndex + direction;
+            LocationComponent current_location = _heroesTravelComponent.GetCurrentLocation();
 
-            //Pendant un déplacement, les actions de naviguation sont ignorées
-            if (_isMoving)
-            {
-                return;
-            }
-            //Si aucune destination enregistrée
-            if (_gameDestinationTable.Count == 0)
+            //Héros est en train de se déplacer
+            if (_heroesTravelComponent.GetIsMoving())
             {
                 return;
             }
 
+            //Si le nombre de liaison est null
+            if (current_location.GetLocationTableCount() == 0)
+            {
+                return;
+            }
+                  
             //Si aucune, prendre la première
             if (new_direction_index < 0)
             {
                 new_direction_index = 0;
             }
-            //Aussi non, prendre nouvelle direction
+            //Aussi non, prendre le dernier
             else if (new_direction_index >= _gameObjectTable.Count)
             {
                 new_direction_index = _gameObjectTable.Count - 1;
             }
 
+            //Nouvelle direction
             _selectedDestinationIndex = new_direction_index;
         }
 
         //Lance le déplacement vers la destination sélectionnée, si aucune sélection ne rien faire
         private void ConfirmSelection()
         {
-            if (_selectedDestinationIndex == 0 || _isMoving)
+            if (_selectedDestinationIndex == 0 || _heroesTravelComponent.GetIsMoving())
             {
                 return;
             }
 
-            _destinationLocation = _currentLocation.GetLiaisonDestination(_selectedDestinationIndex);
-            _isMoving = true;
+            LocationComponent current_location = _heroesTravelComponent.GetCurrentLocation();
+            LocationComponent destination = current_location.GetLiaisonDestination(_selectedDestinationIndex);
+            float duration = current_location.GetLiaisonDuration(_selectedDestinationIndex);
+
+            _heroesTravelComponent.StartTravel(destination, duration);
         }
 
         //Annule la sélection en cours
         private void CancelSelection()
         {
-            _selectedDestinationIndex = 0;
+            _hasSelectedDestination = false;
         }
 
         //Retourne l'arrêt
