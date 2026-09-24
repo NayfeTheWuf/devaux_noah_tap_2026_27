@@ -1,7 +1,4 @@
-﻿using ConsoleApp.Components;
-using System.Collections.Generic;
-
-namespace ConsoleApp.CORE.Components
+﻿namespace GameLibrary.Components
 {
     public class LocationComponent : Component
     {

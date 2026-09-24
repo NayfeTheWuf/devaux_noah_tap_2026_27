@@ -1,6 +1,5 @@
-﻿using ConsoleApp.CORE.Components;
-using ConsoleApp.CORE.Events;
-using ConsoleApp.Events;
+﻿using GameLibrary;
+using GameLibrary.Events;
 using System;
 using System.Diagnostics;
 

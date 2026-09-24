@@ -1,7 +1,6 @@
-﻿using ConsoleApp.Components;
-using System.Collections.Generic;
+﻿using GameLibrary.Components;
 
-namespace ConsoleApp
+namespace GameLibrary
 {
     public class GameObject
     {

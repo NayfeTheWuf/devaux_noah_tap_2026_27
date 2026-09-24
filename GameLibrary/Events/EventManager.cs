@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-
-namespace ConsoleApp.Events
+﻿namespace GameLibrary.Events
 {
     public class EventManager
     {

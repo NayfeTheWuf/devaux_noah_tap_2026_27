@@ -1,7 +1,4 @@
-﻿using ConsoleApp.Events;
-using ConsoleApp.CORE.Components;
-
-namespace ConsoleApp.CORE.Events
+﻿namespace GameLibrary.Events
 {
     public class GameActionGameEvent : IGameEvent
     {

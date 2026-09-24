@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Components
+﻿namespace GameLibrary.Components
 {
     public abstract class Component
     {

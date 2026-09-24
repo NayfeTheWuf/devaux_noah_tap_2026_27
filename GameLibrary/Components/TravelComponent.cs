@@ -1,9 +1,6 @@
-﻿using ConsoleApp.Components;
-using ConsoleApp.CORE.Events;
-using ConsoleApp.Events;
-using System;
+﻿using GameLibrary.Events;
 
-namespace ConsoleApp.CORE.Components
+namespace GameLibrary.Components
 {
     public class TravelComponent : Component
     {

@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Events
+﻿namespace GameLibrary.Events
 {
     public interface IGameEvent
     {

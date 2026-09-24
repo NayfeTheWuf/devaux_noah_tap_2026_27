@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleApp
+﻿namespace GameLibrary
 {
     public enum GameActionType
     {

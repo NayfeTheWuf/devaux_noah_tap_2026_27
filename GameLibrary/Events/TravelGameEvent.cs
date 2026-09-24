@@ -1,8 +1,6 @@
-﻿using ConsoleApp.CORE.Components;
-using ConsoleApp.Events;
-using System;
+﻿using GameLibrary.Components;
 
-namespace ConsoleApp.CORE.Events
+namespace GameLibrary.Events
 {
     public class TravelGameEvent : IGameEvent
     {

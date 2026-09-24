@@ -1,8 +1,6 @@
-﻿using ConsoleApp.CORE.Components;
-using System;
-using System.Collections.Generic;
+﻿using GameLibrary.Components;
 
-namespace ConsoleApp
+namespace GameLibrary
 {
     public class WorldBuilderManager
     {

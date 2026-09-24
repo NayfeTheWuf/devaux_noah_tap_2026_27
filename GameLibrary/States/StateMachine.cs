@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.States
+﻿namespace GameLibrary.States
 {
     public class StateMachine
     {

@@ -1,10 +1,7 @@
-using ConsoleApp.CORE.Components;
-using ConsoleApp.CORE.Events;
-using ConsoleApp.Events;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using GameLibrary.Components;
+using GameLibrary.Events;
 
-namespace ConsoleApp
+namespace GameLibrary
 {
     public class GameManager
     {
