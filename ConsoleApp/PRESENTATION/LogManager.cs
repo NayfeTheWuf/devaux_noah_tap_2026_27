@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using activity_00_tap_26_27.Events;
+using ConsoleApp.Events;
 
-namespace activity_00_tap_26_27
+namespace ConsoleApp
 {
     public class LogManager
     {

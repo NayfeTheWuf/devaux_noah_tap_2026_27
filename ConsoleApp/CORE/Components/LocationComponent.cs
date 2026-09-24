@@ -1,7 +1,7 @@
-﻿using activity_00_tap_26_27.Components;
+﻿using ConsoleApp.Components;
 using System.Collections.Generic;
 
-namespace activity_00_tap_26_27.CORE.Components
+namespace ConsoleApp.CORE.Components
 {
     public class LocationComponent : Component
     {

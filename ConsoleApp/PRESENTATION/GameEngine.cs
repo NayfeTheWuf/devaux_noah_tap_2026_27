@@ -1,10 +1,10 @@
-﻿using activity_00_tap_26_27.CORE.Components;
-using activity_00_tap_26_27.CORE.Events;
-using activity_00_tap_26_27.Events;
+﻿using ConsoleApp.CORE.Components;
+using ConsoleApp.CORE.Events;
+using ConsoleApp.Events;
 using System;
 using System.Diagnostics;
 
-namespace activity_00_tap_26_27
+namespace ConsoleApp
 {
     public class GameEngine
     {

@@ -1,4 +1,6 @@
-﻿namespace activity_00_tap_26_27
+﻿using GameLibrary;
+
+namespace ConsoleApp
 {
     class Program
     {

@@ -1,9 +1,9 @@
-﻿using activity_00_tap_26_27.Components;
-using activity_00_tap_26_27.CORE.Events;
-using activity_00_tap_26_27.Events;
+﻿using ConsoleApp.Components;
+using ConsoleApp.CORE.Events;
+using ConsoleApp.Events;
 using System;
 
-namespace activity_00_tap_26_27.CORE.Components
+namespace ConsoleApp.CORE.Components
 {
     public class TravelComponent : Component
     {

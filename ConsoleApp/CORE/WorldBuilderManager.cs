@@ -1,8 +1,8 @@
-﻿using activity_00_tap_26_27.CORE.Components;
+﻿using ConsoleApp.CORE.Components;
 using System;
 using System.Collections.Generic;
 
-namespace activity_00_tap_26_27
+namespace ConsoleApp
 {
     public class WorldBuilderManager
     {

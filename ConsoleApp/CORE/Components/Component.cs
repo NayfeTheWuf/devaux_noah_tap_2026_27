@@ -1,4 +1,4 @@
-﻿namespace activity_00_tap_26_27.Components
+﻿namespace ConsoleApp.Components
 {
     public abstract class Component
     {

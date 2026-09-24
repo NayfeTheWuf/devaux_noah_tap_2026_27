@@ -1,7 +1,7 @@
-﻿using activity_00_tap_26_27.Events;
-using activity_00_tap_26_27.CORE.Components;
+﻿using ConsoleApp.Events;
+using ConsoleApp.CORE.Components;
 
-namespace activity_00_tap_26_27.CORE.Events
+namespace ConsoleApp.CORE.Events
 {
     public class GameActionGameEvent : IGameEvent
     {

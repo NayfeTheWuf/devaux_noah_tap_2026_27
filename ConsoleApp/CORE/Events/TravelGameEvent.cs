@@ -1,8 +1,8 @@
-﻿using activity_00_tap_26_27.CORE.Components;
-using activity_00_tap_26_27.Events;
+﻿using ConsoleApp.CORE.Components;
+using ConsoleApp.Events;
 using System;
 
-namespace activity_00_tap_26_27.CORE.Events
+namespace ConsoleApp.CORE.Events
 {
     public class TravelGameEvent : IGameEvent
     {
