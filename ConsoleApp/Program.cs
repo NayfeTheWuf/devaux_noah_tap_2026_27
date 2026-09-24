@@ -1,6 +1,4 @@
-﻿using GameLibrary;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     class Program
     {
