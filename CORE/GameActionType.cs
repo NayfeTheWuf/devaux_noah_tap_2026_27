@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace activity_00_tap_26_27.CORE.Components
+namespace activity_00_tap_26_27
 {
     public enum GameActionType
     {
@@ -9,7 +9,6 @@ namespace activity_00_tap_26_27.CORE.Components
         CONFIRM,
         CANCEL,
         QUIT,
-
         NULL
     }
 }
