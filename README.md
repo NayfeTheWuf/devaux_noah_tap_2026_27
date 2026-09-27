@@ -1,3 +1,5 @@
+Readme de la fiche 01 : 
+
 1. La boucle dépend de la machine où elle tourne et les objets sont compter comme les règles du jeu donc ça reste dans Core.
 2. FixedUpdate tourne toujours au même rythme. Si on utilisait Update, la puissance du PC changerai la donne sur la vitesse de déplacement, 
     un PC moins puissant serait plus lent qu'un PC puissant.
