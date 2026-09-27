@@ -57,6 +57,8 @@ namespace GameLibraryTest
         private GameManager CreateGameManager(EventManager event_manager)
         {
             GameManager game_manager = new GameManager(event_manager);
+
+            event_manager.TriggerEvent(new GameActionGameEvent(GameActionType.CONFIRM));
             event_manager.ProcessEvent();
 
             return game_manager;

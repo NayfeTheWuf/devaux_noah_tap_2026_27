@@ -110,8 +110,31 @@ namespace ConsoleApp
             _gameManager.Update(elapsed_time);
         }
 
-        //Méthode de rendu graphique de base
+        //Méthode de rendu graphique
         private void Render()
+        {
+            if (_gameManager.GetIsMenuStateActive())
+            {
+                RenderMainMenu();
+            }
+            else
+            {
+                RenderExploring();
+            }
+
+            _renderManager.Render();
+        }
+
+        //Écran titre
+        private void RenderMainMenu()
+        {
+            _renderManager.Draw(0, 0, "Main Menu", ConsoleColor.Magenta);
+            _renderManager.Draw(0, 1, "Press CONFIRM to start", ConsoleColor.White);
+            _renderManager.Draw(0, 2, "Press QUIT to leave", ConsoleColor.White);
+        }
+
+        //Exploration
+        private void RenderExploring()
         {
             //Apparition de la console
             _renderManager.Draw(0, 0, "Game in progress...", ConsoleColor.Magenta);
@@ -131,7 +154,7 @@ namespace ConsoleApp
 
                 //Affichage
                 string destination_line = (destination_index + 1) + ". " + destination_name + ": Distance: " + destination_duration;
-                
+
                 //Coloré l'élément sélectionné
                 ConsoleColor background_color = ConsoleColor.Black;
                 if (destination_index == selected_destination_index)
@@ -141,8 +164,6 @@ namespace ConsoleApp
 
                 _renderManager.Draw(0, 2 + destination_index, destination_line, ConsoleColor.Green, background_color);
             }
-
-            _renderManager.Render();
         }
 
         //Retourner le temps actuel

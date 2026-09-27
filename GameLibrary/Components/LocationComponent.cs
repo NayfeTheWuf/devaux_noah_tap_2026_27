@@ -5,6 +5,7 @@
         //Var de location
         private string _locationName;
         private List<ConnectionComponent> _liaisonLocationTable = new List<ConnectionComponent>();
+        private LocationComponent _parentLocation;
 
         public LocationComponent(string location_name)
         {
@@ -21,6 +22,12 @@
         public int GetLocationTableCount()
         {
             return _liaisonLocationTable.Count;
+        }
+
+        //Retourne le lieu parent
+        public LocationComponent GetParentLocation()
+        {
+            return _parentLocation;
         }
 
         //Retourne le lieu voisin voulu
