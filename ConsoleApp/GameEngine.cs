@@ -111,7 +111,35 @@ namespace ConsoleApp
         //Méthode de rendu graphique de base
         private void Render()
         {
-            _renderManager.Draw(0,0, "Game in progress...\n", ConsoleColor.Magenta);
+            //Apparition de la console
+            _renderManager.Draw(0, 0, "Game in progress...", ConsoleColor.Magenta);
+
+            //Récupérer la location actuelle
+            string current_location_line = "Exploring " + _gameManager.GetCurrentLocationName();
+            _renderManager.Draw(0, 1, current_location_line, ConsoleColor.Cyan);
+            int selected_destination_index = _gameManager.GetSelectedDestinationIndex();
+
+            //Récupérer les prochaines destinations 
+            int destination_count = _gameManager.GetDestinationCount();
+
+            for (int destination_index = 0; destination_index < destination_count; destination_index++)
+            {
+                string destination_name = _gameManager.GetDestinationName(destination_index);
+                float destination_duration = _gameManager.GetDestinationDuration(destination_index);
+
+                //Affichage
+                string destination_line = (destination_index + 1) + ". " + destination_name + ": Distance: " + destination_duration;
+                
+                //Coloré l'élément sélectionné
+                ConsoleColor background_color = ConsoleColor.Black;
+                if (destination_index == selected_destination_index)
+                {
+                    background_color = ConsoleColor.DarkGreen;
+                }
+
+                _renderManager.Draw(0, 2 + destination_index, destination_line, ConsoleColor.Green, background_color);
+            }
+
             _renderManager.Render();
         }
 

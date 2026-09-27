@@ -11,7 +11,6 @@ namespace GameLibrary
         //Var d'action
         private bool _shouldQuit = false;
 
-
         //Var de location
         private TravelComponent _heroesTravelComponent;
         private int _selectedDestinationIndex = -1;
@@ -162,6 +161,39 @@ namespace GameLibrary
         public bool GetShouldQuit()
         {
             return _shouldQuit;
+        }
+
+        //Retourne le nom du lieu actuel
+        public string GetCurrentLocationName()
+        {
+            return _heroesTravelComponent.GetCurrentLocation().GetLocationName();
+        }
+
+        //Retourne le nombre de destinations accessibles
+        public int GetDestinationCount()
+        {
+            LocationComponent current_location = _heroesTravelComponent.GetCurrentLocation();
+            return current_location.GetLocationTableCount();
+        }
+
+        //Retourne le nom de la destination demandée
+        public string GetDestinationName(int destination_index)
+        {
+            LocationComponent current_location = _heroesTravelComponent.GetCurrentLocation();
+            return current_location.GetLiaisonDestination(destination_index).GetLocationName();
+        }
+
+        //Retourne la durée du trajet vers la destination demandée
+        public float GetDestinationDuration(int destination_index)
+        {
+            LocationComponent current_location = _heroesTravelComponent.GetCurrentLocation();
+            return current_location.GetLiaisonDuration(destination_index);
+        }
+
+        //Retourne l'index actuellement sélectionné
+        public int GetSelectedDestinationIndex()
+        {
+            return _selectedDestinationIndex;
         }
 
         //Mise à jour à intervalles de temps fixes        
