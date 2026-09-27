@@ -153,10 +153,10 @@ namespace GameLibrary
             _gameFlowStateStateMachine.ChangeState(new ExploringState(this, _eventManager));
         }
 
-        //Retourne l'arrêt
-        public bool RequestQuit()
+        //Donner l'arrêt
+        public void RequestQuit()
         {
-            return _shouldQuit;
+            _shouldQuit = true;
         }
 
         //Remonte au lieu parent ou retourne au menu si on y est déjà
