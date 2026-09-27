@@ -5,7 +5,7 @@ namespace GameLibraryTest
 {
     public class ConnectionComponentTests
     {
-        [SetUp]
+        [Test]
         public void GetDestination_ReturnsConstructionDestination()
         {
             LocationComponent destination = CreateLocation("Daisy Town");
