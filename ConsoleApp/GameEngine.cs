@@ -1,5 +1,6 @@
 ﻿using GameLibrary;
 using GameLibrary.Events;
+using GameLibrary.Logs;
 using System;
 using System.Diagnostics;
 
@@ -26,7 +27,8 @@ namespace ConsoleApp
             float last_time = GetCurrentTime();
 
             //Appel des Manager
-            LogManager log_manager = new LogManager(_eventManager);
+            ILogWriter log_writer = new LogFileWriter();
+            LogManager log_manager = new LogManager(_eventManager, log_writer);
             _gameManager = new GameManager(_eventManager);
 
             //Game loop
