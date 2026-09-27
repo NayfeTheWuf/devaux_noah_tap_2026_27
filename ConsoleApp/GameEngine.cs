@@ -64,7 +64,7 @@ namespace ConsoleApp
                 GameActionType game_action_type = TranslateKey(player_command.Key);
 
                 //Si l'input est correcte, trigger l'event lié
-                if (game_action_type != null)
+                if (game_action_type != GameActionType.NULL)
                 {
                     _eventManager.TriggerEvent(new GameActionGameEvent(game_action_type));
                 }
@@ -77,23 +77,18 @@ namespace ConsoleApp
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    Console.WriteLine("Up");
                     return GameActionType.NAVIGATE_UP;
 
                 case ConsoleKey.DownArrow:
-                    Console.WriteLine("Down");
                     return GameActionType.NAVIGATE_DOWN;
 
                 case ConsoleKey.Enter:
-                    Console.WriteLine("Confirm");
                     return GameActionType.CONFIRM;
 
                 case ConsoleKey.Backspace:
-                    Console.WriteLine("Cancel");
                     return GameActionType.CANCEL;
 
                 case ConsoleKey.Escape:
-                    Console.WriteLine("Quit");
                     return GameActionType.QUIT;
                 
                 default:

@@ -3,17 +3,17 @@
     public class LocationComponent : Component
     {
         //Var de location
-        private string _location_name;
+        private string _locationName;
         private List<(LocationComponent Destination, float Duration)> _liaisonLocationTable = new List<(LocationComponent, float)>();
 
         public LocationComponent(string location_name)
         {
-            _location_name = location_name;
+            _locationName = location_name;
         }
 
         public string GetLocationName()
         {
-            return _location_name;
+            return _locationName;
         }
 
         //Nombre de liaison à un lieu // de voisin potentiel

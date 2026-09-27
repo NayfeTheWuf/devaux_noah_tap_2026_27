@@ -71,7 +71,6 @@ namespace GameLibrary
             {
                 case GameActionType.NAVIGATE_UP:
                     NavigateSelection(-1);
-                    
                     break;
 
                 case GameActionType.NAVIGATE_DOWN:
@@ -128,7 +127,7 @@ namespace GameLibrary
                     new_direction_index = 0;
                 }
                 //Aussi non, prendre le dernier
-                else if (new_direction_index >= _gameObjectTable.Count)
+                else if (new_direction_index >= current_location.GetLocationTableCount())
                 {
                     new_direction_index = _gameObjectTable.Count - 1;
                 }
