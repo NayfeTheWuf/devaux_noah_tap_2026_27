@@ -50,6 +50,7 @@ namespace GameLibraryTest
             game_manager.FixedUpdate(100.0f);
 
             Assert.That(game_manager.GetCurrentLocationName(), Is.EqualTo(expected_destination_name));
+
             Assert.That(game_manager.GetSelectedDestinationIndex(), Is.EqualTo(-1));
         }
 

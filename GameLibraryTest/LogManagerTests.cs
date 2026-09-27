@@ -15,6 +15,7 @@ namespace GameLibraryTest
             event_manager.TriggerEvent(new LogMessageGameEvent("Hello"));
 
             Assert.That(log_writer.GetWrittenLineCount(), Is.EqualTo(1));
+
             Assert.That(log_writer.GetWrittenLine(0), Does.EndWith("Hello"));
         }
 
@@ -29,6 +30,7 @@ namespace GameLibraryTest
             event_manager.TriggerEvent(new LogMessageGameEvent("Second"));
 
             Assert.That(log_writer.GetWrittenLine(0), Does.EndWith("First"));
+
             Assert.That(log_writer.GetWrittenLine(1), Does.EndWith("Second"));
         }
     }

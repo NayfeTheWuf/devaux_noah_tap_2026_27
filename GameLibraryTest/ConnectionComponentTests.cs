@@ -12,6 +12,7 @@ namespace GameLibraryTest
             ConnectionComponent connection = new ConnectionComponent(destination, 3.0f);
 
             Assert.That(connection.GetDestination(), Is.EqualTo(destination));
+
             Assert.That(connection.GetDuration(), Is.EqualTo(3.0f).Within(0.001f));
         }
 
