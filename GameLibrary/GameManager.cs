@@ -7,17 +7,13 @@ namespace GameLibrary
     {
         //Var de base de donnée
         private readonly List<GameObject> _gameObjectTable = new List<GameObject>();
-        private List<GameActionType> _gameDestinationTable = new List<GameActionType>();
 
         //Var d'action
-        private bool _isMoving = false;
         private bool _shouldQuit = false;
 
 
         //Var de location
         private TravelComponent _heroesTravelComponent;
-        private LocationComponent _currentLocation;
-        private LocationComponent _destinationLocation;
         private int _selectedDestinationIndex = -1;
 
         //Enregistrement et utilisation des events
@@ -32,15 +28,19 @@ namespace GameLibrary
             //WorldMapping
             WorldBuilderManager world_builder = new WorldBuilderManager();
             world_builder.BuildWorld();
+
+            LocationComponent starting_location = world_builder.GetStartingLocation();
+            List<GameObject> location_game_objects = world_builder.GetLocationGameObjects();
+
             //Enregistrer chaque location
-            for (int object_index = 0; object_index < world_builder._locationGameObjects.Count; object_index++)
+            for (int object_index = 0; object_index < location_game_objects.Count; object_index++)
             {
-                event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(world_builder._locationGameObjects[object_index]));
+                event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(location_game_objects[object_index]));
             }
 
             //Groupe de héros
             GameObject heroes_object = new GameObject("Heroes");
-            _heroesTravelComponent = new TravelComponent(world_builder._startingLocation, event_manager);
+            _heroesTravelComponent = new TravelComponent(starting_location, event_manager);
             heroes_object.AddComponent(_heroesTravelComponent);
             heroes_object.SetIsActive(true);
             event_manager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(heroes_object));

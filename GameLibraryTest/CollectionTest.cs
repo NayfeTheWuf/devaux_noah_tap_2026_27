@@ -2,7 +2,7 @@ using GameLibrary;
 
 namespace GameLibraryTest
 {
-    public class Tests
+    public class CollectionTest
     {
         [SetUp]
         public void Setup()

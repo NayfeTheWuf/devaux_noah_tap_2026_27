@@ -5,9 +5,22 @@ namespace GameLibrary
     public class WorldBuilderManager
     {
         //Var de création du monde
-        public List<GameObject> _locationGameObjects = new List<GameObject>();
-        public LocationComponent _startingLocation;
+        private List<GameObject> _locationGameObjects = new List<GameObject>();
+        private LocationComponent _startingLocation;
 
+        //Retourner la première location de départ
+        public LocationComponent GetStartingLocation()
+        {
+            return _startingLocation;
+        }
+
+        //Retourner la liste de location
+        public List<GameObject> GetLocationGameObjects()
+        {
+            return _locationGameObjects;
+        }
+
+        //Créer le monde du jeu
         public void BuildWorld()
         {
             LocationComponent world_location = CreateLocation("The World");
