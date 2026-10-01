@@ -26,26 +26,22 @@ namespace GameLibrary
             LocationComponent world_location = CreateLocation("The World");
 
             LocationComponent region_location = CreateLocation("Brumes Island");
-
-            LocationComponent town_location = CreateLocation("FireTown");
-
-            LocationComponent shop_location = CreateLocation("Klerck Shop");
-            LocationComponent inn_location = CreateLocation("Hostel");
-            
-            LocationComponent dungeon_location = CreateLocation("Forgotten Dungeon");
-
-            LocationComponent dungeon_floor_1_location = CreateLocation("Dungeon - Floor 1");
-            LocationComponent dungeon_floor_2_location = CreateLocation("Dungeon - Floor 2");
-
             world_location.LinkTo(region_location, 10f);
 
+            LocationComponent town_location = CreateLocation("FireTown");
             region_location.LinkTo(town_location, 5f);
-            region_location.LinkTo(dungeon_location, 10f);
 
+            LocationComponent shop_location = CreateLocation("Klerck Shop");
             town_location.LinkTo(shop_location, 1f);
+            LocationComponent inn_location = CreateLocation("Hostel");
             town_location.LinkTo(inn_location, 1f);
 
+            LocationComponent dungeon_location = CreateLocation("Forgotten Dungeon");
+            region_location.LinkTo(dungeon_location, 10f);
+
+            LocationComponent dungeon_floor_1_location = CreateLocation("Dungeon - Floor 1");
             dungeon_location.LinkTo(dungeon_floor_1_location, 2f);
+            LocationComponent dungeon_floor_2_location = CreateLocation("Dungeon - Floor 2");
             dungeon_floor_1_location.LinkTo(dungeon_floor_2_location, 3f);
 
             //Le joueur doit commencer dans la ville
