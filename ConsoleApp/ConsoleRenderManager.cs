@@ -72,7 +72,6 @@ namespace ConsoleApp
         //Affiche le visuel définit
         public void Render()
         {
-            // The actual drawing to the console happens here by comparing buffers
             for (int y = 0; y < _height; y++)
             {
                 for (int x = 0; x < _width; x++)

@@ -4,7 +4,7 @@
     {
         //Var de location
         private string _locationName;
-        private List<ConnectionComponent> _liaisonLocationTable = new List<ConnectionComponent>();
+        private readonly List<ConnectionComponent> _liaisonLocationTable = new List<ConnectionComponent>();
         private LocationComponent _parentLocation;
 
         public LocationComponent(string location_name)
