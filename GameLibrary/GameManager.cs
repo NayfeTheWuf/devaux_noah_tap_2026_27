@@ -34,7 +34,7 @@ namespace GameLibrary
 
             //Etat menu principal 
             _gameFlowStateStateMachine = new StateMachine(event_manager);
-            _gameFlowStateStateMachine.SetInitialState(new MainMenuState(this, event_manager));
+            _gameFlowStateStateMachine.SetInitialState(new MainMenuState(_gameFlowStateStateMachine ,this, event_manager));
         }
 
         //Enregistrer un objet dans un event
@@ -150,7 +150,7 @@ namespace GameLibrary
 
             //Gérer l'état du jeu
             _isMenuStateActive = false;
-            _gameFlowStateStateMachine.ChangeState(new ExploringState(this, _eventManager));
+            _gameFlowStateStateMachine.ChangeState(new ExploringState(_gameFlowStateStateMachine, this, _eventManager));
         }
 
         //Donner l'arrêt
@@ -174,7 +174,7 @@ namespace GameLibrary
             if (parent_location == null)
             {
                 _isMenuStateActive = true;
-                _gameFlowStateStateMachine.ChangeState(new MainMenuState(this, _eventManager));
+                _gameFlowStateStateMachine.ChangeState(new MainMenuState(_gameFlowStateStateMachine, this, _eventManager));
                 return;
             }
 

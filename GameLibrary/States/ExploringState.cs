@@ -4,11 +4,13 @@ namespace GameLibrary.States
 {
     public class ExploringState : IState
     {
+        private readonly StateMachine _stateMachine;
         private readonly GameManager _gameManager;
         private readonly EventManager _eventManager;
 
-        public ExploringState(GameManager game_manager, EventManager event_manager)
+        public ExploringState(StateMachine state_machine, GameManager game_manager, EventManager event_manager)
         {
+            _stateMachine = state_machine;
             _gameManager = game_manager;
             _eventManager = event_manager;
         }
