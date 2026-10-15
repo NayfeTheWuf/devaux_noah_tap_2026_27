@@ -5,40 +5,35 @@ namespace GameLibrary.Csv
 {
     public class ContentReport
     {
+        //Données d'erreurs
+        private class ErrorData
+        {
+            public string _fileName;
+            public int _fileLine;
+            public string _message;
+        }
+        
         //Var
-        private string _filePath = Path.GetFullPath("../../../Data/locations.csv");
-        private readonly List<ContentReport> _errors = new List<ContentReport>();
+        private readonly List<ErrorData> _errorTable = new List<ErrorData>();
 
         //Ajoute l'erreur et la renvoie à l'utilisateur 
-        public void AddError(string file_name, int line_number, string message)
+        public void AddError(string file_name, int file_line, string message)
         {
-            if (!File.Exists(_filePath)) 
-            { 
-                Console.WriteLine($"file locations.csv not found at {_filePath}"); 
-            }
-            else
-            {
-                try { 
-                    string content = File.ReadAllText(_filePath); 
-                }
-                catch (IOException)
-                {
-                    Console.WriteLine($"locations.csv cannot be read. Close it in your spreadsheet and try again.");
-                }
-                
-            }
+            _errorTable.Add(new ErrorData { _fileName = file_name, _fileLine = file_line, _message = message });
         }
 
         //Retourne le nombre d'erreur compté
-        public void GetErrorCount()
+        public int GetErrorCount()
         {
-
+            return _errorTable.Count();
         }
 
         //Retourner le texte d'erreur de l'index choisit 
-        public void GetErrorTextAtIndex(int error_index)
+        public string GetErrorTextAtIndex(int error_index)
         {
+            ErrorData error_data = _errorTable[error_index];
 
+            return $"{error_data._fileName}, line {error_data._fileLine}: {error_data._message}";
         }
     }
 }

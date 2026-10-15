@@ -1,8 +1,16 @@
 ﻿namespace GameLibrary.Components
 {
-    public abstract class Component
+    public abstract class Component 
     {
+        //Var
         private bool _isActive = true;
+        private GameObject _gameObject;
+
+        //Constructeur 
+        public Component(GameObject game_object)
+        {
+            _gameObject = game_object;
+        }
 
         public virtual void Update(float elapsed_time)
         {

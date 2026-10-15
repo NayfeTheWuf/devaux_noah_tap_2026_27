@@ -1,4 +1,5 @@
-﻿using GameLibrary.Components;
+﻿using GameLibrary;
+using GameLibrary.Components;
 
 namespace GameLibraryTest
 {
@@ -8,8 +9,10 @@ namespace GameLibraryTest
         //A à B
         public void LinkTo_AddsDestinationToSourceLocation()
         {
-            LocationComponent location_a = new LocationComponent("A");
-            LocationComponent location_b = new LocationComponent("B");
+            string location_name = null;
+            GameObject location_game_object = new GameObject(location_name);
+            LocationComponent location_a = new LocationComponent("A", location_game_object);
+            LocationComponent location_b = new LocationComponent("B", location_game_object);
 
             location_a.LinkTo(location_b, 5.0f);
 
@@ -24,8 +27,10 @@ namespace GameLibraryTest
         //B à A
         public void LinkTo_AddsSourceLocationToDestination()
         {
-            LocationComponent location_a = new LocationComponent("A");
-            LocationComponent location_b = new LocationComponent("B");
+            string location_name = null;
+            GameObject location_game_object = new GameObject(location_name);
+            LocationComponent location_a = new LocationComponent("A", location_game_object);
+            LocationComponent location_b = new LocationComponent("B", location_game_object);
 
             location_a.LinkTo(location_b, 5.0f);
 

@@ -15,7 +15,7 @@ namespace GameLibrary.Components
         private bool _isMoving = false;
         private float _elapsedTime;
 
-        public TravelComponent(LocationComponent current_location, EventManager event_manager)
+        public TravelComponent(LocationComponent current_location, EventManager event_manager, GameObject game_object) : base(game_object)
         {
             _currentLocation = current_location;
             _eventManager = event_manager;

@@ -1,4 +1,6 @@
-﻿namespace GameLibrary.Components
+﻿using System.ComponentModel;
+
+namespace GameLibrary.Components
 {
     public class ConnectionComponent
     {

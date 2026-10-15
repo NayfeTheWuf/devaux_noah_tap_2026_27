@@ -7,7 +7,7 @@
         private readonly List<ConnectionComponent> _liaisonLocationTable = new List<ConnectionComponent>();
         private LocationComponent _parentLocation;
 
-        public LocationComponent(string location_name)
+        public LocationComponent(string location_name, GameObject game_object) : base(game_object)
         {
             _locationName = location_name;
         }

@@ -143,7 +143,7 @@ namespace GameLibrary
 
             //Groupe de héros
             GameObject heroes_object = new GameObject("Heroes");
-            _heroesTravelComponent = new TravelComponent(starting_location, _eventManager);
+            _heroesTravelComponent = new TravelComponent(starting_location, _eventManager, heroes_object);
             heroes_object.AddComponent(_heroesTravelComponent);
             heroes_object.SetIsActive(true);
             _eventManager.DelayedTriggerEvent(new RegisterGameObjectGameEvent(heroes_object));

@@ -52,7 +52,7 @@ namespace GameLibrary
         private LocationComponent CreateLocation(string location_name)
         {
             GameObject location_object = new GameObject(location_name);
-            LocationComponent location_component = new LocationComponent(location_name);
+            LocationComponent location_component = new LocationComponent(location_name, location_object);
 
             location_object.AddComponent(location_component);
             location_object.SetIsActive(true);
