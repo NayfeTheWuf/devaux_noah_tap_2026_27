@@ -19,7 +19,7 @@ namespace GameLibrary.Components
             _itemDataTable = item_data_table;
             _timeInMinutes = 8 * 60;
         }
-
+        
         //Retourne le temps en heure
         public int GetHour()
         {
@@ -48,7 +48,7 @@ namespace GameLibrary.Components
         //Retourne le statut du shop
         public bool GetIsOpen()
         {
-            return GetHour() >= _shopData._openingHour && GetHour() <= _shopData._closingHour;
+            return GetHour() >= _shopData._openingHour && GetHour() < _shopData._closingHour;
         }
 
         //Retourne le nombre d'item dans la table de données
